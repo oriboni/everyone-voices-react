@@ -4,10 +4,11 @@ import getImage from '../../utils/getImage'
 import Input from "../../components/input/input";
 import {useGoogleLogin} from '@react-oauth/google';
 import {useDispatch} from "react-redux";
-import {authAdmin, authUser} from "../../store/reducers/authSlice";
+import {authAdmin, authUser} from "../../store/slices/authSlice";
 import {useNavigate} from "react-router-dom";
 import useInput from "../../hooks/useInput"
 import axios from "axios";
+import Cookies from "js-cookie";
 
 function Login() {
     const pass = "1"
@@ -30,10 +31,15 @@ function Login() {
     // Вход через гугл аккаунт
     const googleLogin = useGoogleLogin ( {
         onSuccess: async (tokenResponse) => {
-            dispatch(authAdmin())
+
             const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
                 headers: {Authorization: `Bearer ${tokenResponse.access_token}`},
             })
+                .then((userInfo) => {
+                    return {...userInfo.data}
+                })
+            Cookies.set("profile", JSON.stringify(userInfo))
+            dispatch(authUser(userInfo))
             navigate("/")
         },
         onError: (errorResponse) => console.log(errorResponse)
@@ -42,7 +48,8 @@ function Login() {
     // Валидация полей входа по логину и паролю
     const adminLogin = () => {
         if (password.value === pass && email.value === pass) {
-            dispatch(authUser())
+            Cookies.set('profile', JSON.stringify({email: email.value}))
+            dispatch(authAdmin({email: email.value}))
             navigate("/")
         } else {
             setCorrectInput(true)
