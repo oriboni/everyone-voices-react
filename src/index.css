@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Forum&display=swap');
+@font-face {
+  font-family: 'GardensC';
+  src: url(./fonts/GardensC_03_1.otf);
+}
 
 :root {
   --primary-color: #8a8fa3;
@@ -13,4 +17,13 @@ body {
   box-sizing: border-box;
   width: 100dvw;
   height: 100dvh;
+}
+
+h1, h2, h3, p {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding-inline-start: 0;
 }

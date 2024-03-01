@@ -48,7 +48,7 @@ function Login() {
     // Валидация полей входа по логину и паролю
     const adminLogin = () => {
         if (password.value === pass && email.value === pass) {
-            Cookies.set('profile', JSON.stringify({email: email.value}))
+            Cookies.set('profile', JSON.stringify({email: email.value, adminRole: true}))
             dispatch(authAdmin({email: email.value}))
             navigate("/")
         } else {

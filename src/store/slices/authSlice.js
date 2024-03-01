@@ -16,6 +16,7 @@ export const authSlice = createSlice({
         },
         authAdmin: (state, action) => {
             state.email = action.payload.email
+            state.name = "ADMIN"
             state.adminRole = true
         },
         logout: state => {
