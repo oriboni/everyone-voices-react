@@ -5,6 +5,7 @@ import Login from "../pages/login/Login";
 import {useDispatch, useSelector} from "react-redux";
 import Cookies from "js-cookie";
 import {authAdmin, authUser} from "../store/slices/authSlice";
+import Layout from "../components/layout/layout";
 
 
 const AppRouter = () => {
@@ -31,7 +32,11 @@ const AppRouter = () => {
                         <Route
                             key={route.path}
                             path={route.path}
-                            element={route.element}
+                            element={
+                                <Layout>
+                                    {route.element}
+                                </Layout>
+                            }
                             exact={route.path}
                         />
                     )}
@@ -45,7 +50,11 @@ const AppRouter = () => {
                             <Route
                                 key={route.path}
                                 path={route.path}
-                                element={route.element}
+                                element={
+                                    <Layout>
+                                        {route.element}
+                                    </Layout>
+                                }
                                 exact={route.path}
                             />
                         )
@@ -54,7 +63,6 @@ const AppRouter = () => {
             )
         }
     } else {
-
             return (
                 <Routes>
                     <Route
