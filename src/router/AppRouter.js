@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Route, Routes} from "react-router-dom";
 import {userRoutes, adminRoutes} from "./AllRoutes";
 import Login from "../pages/login/Login";
@@ -11,18 +11,21 @@ import Layout from "../components/layout/layout";
 const AppRouter = () => {
     const dispatch = useDispatch()
     const state = useSelector(state => state.authLevel)
-    if (!state.email) {
-        const cookie = Cookies.get("profile")
-        if (cookie) {
-            const cookieState = JSON.parse(cookie)
-            if (!cookieState.adminRole) {
-                dispatch(authUser(cookieState))
-            } else {
-                dispatch(authAdmin(cookieState))
-            }
+    useEffect(() => {
+        if (!state.email) {
+            const cookie = Cookies.get("profile")
+            if (cookie) {
+                const cookieState = JSON.parse(cookie)
+                if (!cookieState.adminRole) {
+                    dispatch(authUser(cookieState))
+                } else {
+                    dispatch(authAdmin(cookieState))
+                }
 
+            }
         }
-    }
+    }, []);
+
 
     if (state.email) {
         if (!state.adminRole) {
