@@ -4,10 +4,14 @@ import getImage from "../../utils/getImage";
 import Cookies from "js-cookie";
 import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../../store/slices/authSlice";
+import {useLocation, useNavigate} from "react-router-dom";
+import {changeSwitcher} from "../../store/slices/switchTape";
 
 const Burger = ({active, setActive}) => {
     const user = useSelector(state => state.authLevel)
+    const navigate = useNavigate()
     const dispatch = useDispatch()
+    const location = useLocation()
     const closeBurger = () => {
         setActive(false)
     }
@@ -18,7 +22,12 @@ const Burger = ({active, setActive}) => {
             Cookies.remove('profile')
         }
         dispatch(logout())
+    }
 
+    const switchTape = (change) => {
+        if (!(location.pathname === "/")) navigate("/")
+        dispatch(changeSwitcher({switch: change}))
+        localStorage.setItem("switcher", change)
     }
 
     return (
@@ -35,11 +44,11 @@ const Burger = ({active, setActive}) => {
                 </div>
 
                 <ul className={styles.burgerNavbar}>
-                    <li>
+                    <li onClick={() => switchTape(false)}>
                         <img src={getImage("human")} alt=""/>
                         <span>Лента предложений</span>
                     </li>
-                    <li>
+                    <li onClick={() => switchTape(true)}>
                         <img src={getImage("voting")} alt=""/>
                         <span>Лента голосований</span>
                     </li>
