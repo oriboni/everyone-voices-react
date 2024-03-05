@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import styles from './login.module.css'
 import getImage from '../../utils/getImage'
-import Input from "../../components/input/input";
+import Input from "../../components/input/Input";
 import {useGoogleLogin} from '@react-oauth/google';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {authAdmin, authUser} from "../../store/slices/authSlice";
 import {useNavigate} from "react-router-dom";
 import useInput from "../../hooks/useInput"
-import axios from "axios";
 import Cookies from "js-cookie";
+import {googleUserInfo} from "../../API/googleUserInfo";
 
 function Login() {
     const pass = "1"
@@ -18,6 +18,7 @@ function Login() {
     const password = useInput("")
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const state = useSelector(state => state.authLevel)
 
     // Деактивация кнопки "Далее" если одно из полей ввода пустое
     useEffect(() => {
@@ -28,19 +29,17 @@ function Login() {
         }
     }, [email.value, password.value]);
 
+    const setLoginInfo = (info) => {
+        Cookies.set('profile', JSON.stringify(info))
+        info["adminRole"] ? dispatch(authAdmin(info)) : dispatch(authUser(info))
+        navigate("/")
+    }
+
     // Вход через гугл аккаунт
     const googleLogin = useGoogleLogin ( {
         onSuccess: async (tokenResponse) => {
-
-            const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
-                headers: {Authorization: `Bearer ${tokenResponse.access_token}`},
-            })
-                .then((userInfo) => {
-                    return {...userInfo.data}
-                })
-            Cookies.set("profile", JSON.stringify(userInfo))
-            dispatch(authUser(userInfo))
-            navigate("/")
+            const userInfo = await googleUserInfo(tokenResponse.access_token)
+            setLoginInfo(userInfo)
         },
         onError: (errorResponse) => console.log(errorResponse)
     });
@@ -48,9 +47,7 @@ function Login() {
     // Валидация полей входа по логину и паролю
     const adminLogin = () => {
         if (password.value === pass && email.value === pass) {
-            Cookies.set('profile', JSON.stringify({email: email.value, adminRole: true}))
-            dispatch(authAdmin({email: email.value}))
-            navigate("/")
+            setLoginInfo({email: email.value, adminRole: true})
         } else {
             setCorrectInput(true)
         }
@@ -103,14 +100,14 @@ function Login() {
                         onClick={() => adminLogin()}
                         disabled={validButtonLogin}
                     >
-                        Далее
+                        далее
                     </button>
 
                     <button
                         className={styles.googleButton}
                         onClick={() => googleLogin()}
                     >
-                        Войти через Google
+                        войти через Google
                     </button>
                 </div>
             </div>

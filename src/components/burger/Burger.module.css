@@ -1,5 +1,5 @@
 .wrapper {
-    color: var(--quaternary-color);
+    color: var(--fifth-color-color);
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -101,11 +101,11 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    transition: color 1s;
+    transition: color 0.5s;
 }
 
 .burgerNavbar li:hover {
-    color: black
+    color: var(--quaternary-color)
 }
 
 .burgerBottomWrapper {
@@ -138,12 +138,12 @@
     border: none;
     background-color: transparent;
     text-align: start;
-    color: var(--quaternary-color);
-    transition: color 1s;
+    color: var(--fifth-color);
+    transition: color 0.5s;
 }
 
 .burgerBottomWrapper:hover button {
-    color: black;
+    color: var(--quaternary-color);
 }
 
 .burgerBottomWrapper img {

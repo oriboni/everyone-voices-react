@@ -6,6 +6,13 @@ import human from '../icons/human.png'
 import exit from '../icons/exit.png'
 import voting from '../icons/voting.png'
 import burgerStyle from '../icons/burgerStyle.png'
+import sortIcon from '../icons/sortIcon.png'
+import filterIcon from '../icons/filterIcon.png'
+import likeFill from '../icons/likeFill.svg'
+import like from '../icons/like.svg'
+import comment from '../icons/comment.svg'
+import arrowDown from '../icons/arrowDown.png'
+import search from '../icons/search.svg'
 
 const images = {
     logo,
@@ -15,7 +22,14 @@ const images = {
     human,
     exit,
     voting,
-    burgerStyle
+    burgerStyle,
+    sortIcon,
+    filterIcon,
+    like,
+    likeFill,
+    comment,
+    arrowDown,
+    search
 }
 
 function getImage(key) {

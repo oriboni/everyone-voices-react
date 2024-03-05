@@ -51,7 +51,10 @@
     filter:drop-shadow(0px 4px 2px rgba(0.2,0.2,0.2,0.3));
     border: none;
     padding: 10px 0;
-    border-radius:7px;
+    border-radius: 7px;
+    font-family: "Forum", sans-serif;
+    font-size: 14px;
+    cursor: pointer;
 }
 
 .googleButton {
@@ -60,4 +63,7 @@
     border: none;
     padding: 10px 40px;
     border-radius:7px;
+    font-family: "Forum", sans-serif;
+    font-size: 14px;
+    cursor: pointer;
 }

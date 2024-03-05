@@ -5,7 +5,7 @@ import Login from "../pages/login/Login";
 import {useDispatch, useSelector} from "react-redux";
 import Cookies from "js-cookie";
 import {authAdmin, authUser} from "../store/slices/authSlice";
-import Layout from "../components/layout/layout";
+import Layout from "../components/layout/Layout";
 
 
 const AppRouter = () => {

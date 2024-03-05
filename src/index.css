@@ -9,14 +9,15 @@
   --secondary-color: #adbbc6;
   --tertiary-color: #ececec;
   --quaternary-color: #374254;
+  --fifth-color: #0E1424;
 }
 
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  width: 100dvw;
-  height: 100dvh;
+  width: auto;
+  height: 100svh;
 }
 
 h1, h2, h3, p {

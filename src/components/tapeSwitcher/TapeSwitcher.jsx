@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import styles from './tapeSwitcher.module.css'
+import styles from './TapeSwitcher.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {changeSwitcher} from "../../store/slices/switchTape";
 
@@ -19,13 +19,20 @@ const TapeSwitcher = ({switchTape, setSwitchTape}) => {
 
     return (
         <div className={styles.wrapper}>
-            <div className={switchState ? styles.colorSwitch + " " + styles.colorSwitchRight : styles.colorSwitch}></div>
+            <div className={switchState ? styles.colorSwitch + " " + styles.colorSwitchRight : styles.colorSwitch}>
+            </div>
 
-            <div className={styles.switchButton} onClick={() => switcher(false)}>
+            <div
+                className={styles.switchButton}
+                onClick={() => switcher(false)}
+            >
                 <span>Лента предложений</span>
             </div>
 
-            <div className={styles.switchButtonRight} onClick={() => switcher(true)}>
+            <div
+                className={styles.switchButtonRight}
+                onClick={() => switcher(true)}
+            >
                 <span>Лента голосований</span>
             </div>
         </div>
