@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './burger.module.css'
+import styles from './Burger.module.css'
 import getImage from "../../utils/getImage";
 import Cookies from "js-cookie";
 import {useDispatch, useSelector} from "react-redux";

@@ -1,0 +1,62 @@
+.sortBarWrapper {
+    position: relative;
+}
+
+.sortBar span, .sortDropDown span {
+    font-family: "GardensC", sans-serif;
+    color: var(--fifth-color);
+    font-size: 12px;
+    line-height: 10px;
+    transition: color 0.5s;
+    cursor: pointer;
+}
+
+.sortBar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 10px;
+}
+
+.sortDropDown {
+    overflow: hidden;
+    width: 149px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 150%;
+    background-color: var(--secondary-color);
+    border-radius: 6px;
+    filter:drop-shadow(0px 4px 4px rgba(0,0,0,0.25));
+    gap: 15px;
+    justify-content: center;
+    transition: all 0.6s;
+}
+
+.sortDropDown span:hover {
+    color: var(--quaternary-color);
+}
+
+.sortDropDownDisactive {
+    padding: 0;
+    height: 0;
+}
+
+.sortDropDownActive {
+    padding: 10px 15px;
+    height: 93px;
+}
+
+.sortIcon {
+    display: flex;
+    justify-content: center;
+    border-radius: 6px;
+    width: 15px;
+    transition: all 0.6s;
+}
+
+.activeSortIcon {
+    background-color: rgba(173, 187, 198, 0.6);
+}
+

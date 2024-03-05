@@ -1,0 +1,10 @@
+.wrapper {
+    width: calc(98% - 40px);
+    height: 16px;
+    background-color: var(--tertiary-color);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}

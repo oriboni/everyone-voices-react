@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styles from './newsTape.module.css'
-import TapeSwitcher from "../../components/tapeSwitcher/tapeSwitcher";
-import {useSelector} from "react-redux";
+import TapeSwitcher from "../../components/tapeSwitcher/TapeSwitcher";
+import TapeComponent from "../../components/tapeComponent/TapeComponent";
 
 function NewsTape() {
-    const switchTape = useSelector(state => state.switchTape.switch)
     return (
         <div className={styles.wrapper}>
             <TapeSwitcher/>
+            <TapeComponent/>
         </div>
     );
 }

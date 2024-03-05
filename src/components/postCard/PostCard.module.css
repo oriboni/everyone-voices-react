@@ -1,0 +1,93 @@
+.wrapper {
+    width: calc(98% - 40px);
+    height: auto;
+    background-color: var(--tertiary-color);
+    border-radius: 6px;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.userBlock {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.userBlock img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: var(--quaternary-color);
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    font-family: "GardensC", sans-serif;
+    font-size: 12px;
+    color: var(--fifth-color);
+    gap: 3px;
+}
+
+.timeStamp {
+    font-family: "Forum", sans-serif;
+    font-size: 10px;
+    color: var(--secondary-color);
+}
+
+.aboutPostWrapper {
+    color: var(--fifth-color);
+    font-family: "GardensC", sans-serif;
+    font-size: 12px;
+}
+
+.blockPictures {
+    align-self: center;
+}
+
+.blockPictures img {
+    display: flex;
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    max-height: 300px;
+}
+
+.blockLikeComm {
+    display: flex;
+    gap: 10px;
+}
+
+.likeWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.like {
+    width: 100%;
+    height: auto;
+}
+
+.likeFill {
+    opacity: 0;
+    position: absolute;
+    transition: all 0.5s;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+}
+
+.likeFillActive {
+    opacity: 1;
+}
+
+.blockLikeComm img {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
