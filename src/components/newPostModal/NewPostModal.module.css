@@ -21,3 +21,7 @@
 .modalWrapperNone {
     display: none;
 }
+
+.choseImage {
+    max-width: 90%;
+}
