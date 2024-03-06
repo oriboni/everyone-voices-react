@@ -1,5 +1,6 @@
 .sortBarWrapper {
     position: relative;
+    z-index: 1;
 }
 
 .sortBar span, .sortDropDown span {
