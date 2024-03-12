@@ -56,38 +56,39 @@
     max-height: 300px;
 }
 
-.blockLikeComm {
+.likeCommentBlock {
     display: flex;
     gap: 10px;
 }
 
-.likeWrapper {
+.likeBlock {
     position: relative;
+    cursor: pointer;
     display: flex;
-    align-items: center;
 }
 
 .like {
     width: 100%;
     height: auto;
+    pointer-events: none;
 }
 
 .likeFill {
-    opacity: 0;
-    position: absolute;
-    transition: all 0.5s;
-    top: 0;
-    left: 0;
     width: 100%;
     height: auto;
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s;
 }
 
 .likeFillActive {
     opacity: 1;
 }
 
-.blockLikeComm img {
+.comment {
     cursor: pointer;
-    transform: scale(1.2);
 }
 

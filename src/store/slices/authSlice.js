@@ -3,6 +3,7 @@ import {createSlice} from "@reduxjs/toolkit";
 export const authSlice = createSlice({
     name: "auth",
     initialState: {
+        id: null,
         email: null,
         name: null,
         picture: null,
@@ -10,6 +11,7 @@ export const authSlice = createSlice({
     },
     reducers: {
         authUser: (state, action) => {
+            state.id = action.payload.id
             state.email = action.payload.email
             state.name = action.payload.name
             state.picture = action.payload.picture
@@ -20,6 +22,7 @@ export const authSlice = createSlice({
             state.adminRole = true
         },
         logout: state => {
+            state.id = null
             state.email = null
             state.name = null
             state.picture = null

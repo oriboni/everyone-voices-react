@@ -1,13 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from './NewPostModal.module.css'
 import useInput from "../../hooks/useInput";
 import {useSelector} from "react-redux";
-const NewPostModal = ({setPost, activeModal, setActiveModal}) => {
+import {createPost} from "../../API/getPosts";
+const NewPostModal = ({activeModal, setActiveModal}) => {
     const themePost = useInput("")
-    const [image, setImage] = useState("")
+    const [image, setImage] = useState(null)
+    const [file, setFile] = useState(null)
     const user = useSelector(state => state.authLevel)
     const date = new Date()
-    const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
     useEffect(() => {
         activeModal
             ?
@@ -16,34 +17,30 @@ const NewPostModal = ({setPost, activeModal, setActiveModal}) => {
             document.body.style.overflow = "unset"
     }, [activeModal]);
 
-    const submit = () => {
-        const newPost =
-            {
-                user: {
-                    picture: user.picture,
-                    name: user.name,
-                },
-                timestamp: `${date.getDate()} ${months[date.getMonth()]} в ${date.getHours()}:${date.getMinutes()}`,
-                post: {
-                    header: themePost.value,
-                    picture: image,
-                }
-            }
-        setPost(prev => [newPost, ...prev])
-        themePost.setValue("")
-        setImage("")
+    const setImageInput = (e) => {
+        setImage(URL.createObjectURL(e.target.files[0]))
+        setFile(e.target.files[0])
+    }
+    const submitForm = async (e) => {
+        e.preventDefault()
+        const formData = new FormData()
+        formData.append('file', file)
+        formData.append('title', themePost.value)
+        formData.append('timestamp', `${date.getDate()}.${date.getMonth()}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`)
+        formData.append('user_id', user.id)
+        await createPost(formData)
         setActiveModal(false)
     }
 
     return (
         <div className={activeModal ? styles.modalWrapper : styles.modalWrapperNone}>
-            <div className={styles.modalInner}>
-                <input type="file" accept=".jpg, .png, .jpeg, .gif, .svg" onChange={(e) => setImage(URL.createObjectURL(e.target.files[0]))}/>
+            <form className={styles.modalInner}>
+                <input type="file" accept=".jpg, .png, .jpeg, .gif, .svg" onChange={(e) => setImageInput(e)}/>
                 <input type="text" placeholder="Тема предложения" value={themePost.value} onChange={themePost.onChange}/>
                 <img className={styles.choseImage} src={image} alt=""/>
                 <button onClick={() => setActiveModal(false)}>Закрыть</button>
-                <button onClick={() => submit()}>Отправить</button>
-            </div>
+                <button onClick={(e) => submitForm(e)}>Отправить</button>
+            </form>
         </div>
     );
 };
