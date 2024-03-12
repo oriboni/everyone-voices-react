@@ -6,6 +6,7 @@ import SortFilterBar from "../sortFilterBar/SortFilterBar";
 import NewPostButton from "../newPostButton/NewPostButton";
 import {getPosts} from "../../API/getPosts";
 import {useFetching} from "../../hooks/useFetching";
+import LoadingComponent from "../loadingComponent/LoadingComponent";
 const TapeComponent = () => {
     const userId = useSelector(state => state.authLevel.id)
     const switchTape = useSelector(state => state.switchTape.switch)
@@ -16,7 +17,11 @@ const TapeComponent = () => {
     })
     useEffect(() => {
         fetchingPost()
-    }, []);
+        if (!!errorPost) {
+            alert(errorPost)
+        }
+        console.log(posts)
+    }, [errorPost]);
 
     return (
         <div className={styles.wrapper}>
@@ -25,13 +30,14 @@ const TapeComponent = () => {
                     ?
                     <div>
                         Лента голсований пока в разработке
+                        <LoadingComponent/>
                     </div>
                     :
                     <div className={styles.wrapper}>
                         <SortFilterBar/>
                         {loadingPost
                             ?
-                            <span>Загрузка</span>
+                            <LoadingComponent/>
                             :
                             posts.map(post => (
                                 <PostCard post={post}/>
