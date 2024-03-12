@@ -3,12 +3,13 @@ import styles from './login.module.css'
 import getImage from '../../utils/getImage'
 import Input from "../../components/input/Input";
 import {useGoogleLogin} from '@react-oauth/google';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {authAdmin, authUser} from "../../store/slices/authSlice";
 import {useNavigate} from "react-router-dom";
 import useInput from "../../hooks/useInput"
 import Cookies from "js-cookie";
 import {googleUserInfo} from "../../API/googleUserInfo";
+import {getUsers, putUsersIcon} from "../../API/getUsers";
 
 function Login() {
     const pass = "1"
@@ -18,7 +19,6 @@ function Login() {
     const password = useInput("")
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const state = useSelector(state => state.authLevel)
 
     // Деактивация кнопки "Далее" если одно из полей ввода пустое
     useEffect(() => {
@@ -39,7 +39,20 @@ function Login() {
     const googleLogin = useGoogleLogin ( {
         onSuccess: async (tokenResponse) => {
             const userInfo = await googleUserInfo(tokenResponse.access_token)
-            setLoginInfo(userInfo)
+
+            // Авторизация через сервер
+            const users = await getUsers(userInfo.email)
+            if (users) {
+                putUsersIcon(users.id, userInfo.picture)
+                const user = {
+                    ...userInfo,
+                    name: users.name,
+                    id: users.id
+                }
+                setLoginInfo(user)
+            } else {
+                alert("Пользователь не найден :(")
+            }
         },
         onError: (errorResponse) => console.log(errorResponse)
     });
