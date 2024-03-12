@@ -29,14 +29,14 @@ const PostCard = ({post}) => {
             }
             if (dayNow === parseInt(datePost[0]) && monthNow === parseInt(datePost[1])) {
                 datePost = "сегодня"
-                return datePost + " в " + timePost
+                return datePost + " в " + timePost.join(":")
             }
             if (dayNow - parseInt(datePost[0]) === 1 && monthNow === parseInt(datePost[1])) {
                 datePost = "вчера"
-                return datePost + " в " + timePost
+                return datePost + " в " + timePost.join(":")
             }
             datePost = datePost[0] + " " + month[parseInt(datePost[1]) - 1]
-            return datePost + " в " + timePost
+            return datePost + " в " + timePost.join(":")
         }
         setTimestamp(timestampPost())
     }, [post]);
