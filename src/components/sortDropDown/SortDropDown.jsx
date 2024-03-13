@@ -8,6 +8,7 @@ const SortDropDown = () => {
     const [sortDropDown, setSortDropDown] = useState(false)
     const sortMethods = ["Сначала популярные", "Сначала новые", "Сначала старые", "Сначала мои предложения"]
     const dispatch = useDispatch()
+    const sorting = useSelector(state => state.sortingSlice.sorting)
     const choseSort = (index) => {
         dispatch(changeSorting({sort: sortMethods[index]}))
         setSortDropDown(false)
@@ -19,7 +20,7 @@ const SortDropDown = () => {
                 className={styles.sortBar}
                 onClick={() => setSortDropDown(!sortDropDown)}
             >
-                <span>Сортировка</span>
+                <span>{sorting}</span>
                 <div className={(sortDropDown ? styles.sortIcon + " " + styles.activeSortIcon : styles.sortIcon)}>
                     <img
                         src={getImage("sortIcon")}

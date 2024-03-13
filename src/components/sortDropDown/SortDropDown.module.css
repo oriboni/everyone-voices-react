@@ -20,6 +20,10 @@
     gap: 10px;
 }
 
+.sortName {
+    font-size: 12px;
+}
+
 .sortDropDown {
     overflow: hidden;
     width: 149px;
