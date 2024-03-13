@@ -9,10 +9,9 @@ import {useNavigate} from "react-router-dom";
 import useInput from "../../hooks/useInput"
 import Cookies from "js-cookie";
 import {googleUserInfo} from "../../API/googleUserInfo";
-import {getUsers, putUsersIcon} from "../../API/getUsers";
+import {getAdminAuth, getUsers, putUsersIcon} from "../../API/getUsers";
 
 function Login() {
-    const pass = "1"
     const [correctInput, setCorrectInput] = useState(false)
     const [validButtonLogin, setValidButtonLogin] = useState(false)
     const email = useInput("")
@@ -58,9 +57,15 @@ function Login() {
     });
 
     // Валидация полей входа по логину и паролю
-    const adminLogin = () => {
-        if (password.value === pass && email.value === pass) {
-            setLoginInfo({email: email.value, adminRole: true})
+    const adminLogin = async () => {
+        const {truePassword, id} = await getAdminAuth(email.value, password.value)
+        if (typeof(truePassword) === 'boolean' && truePassword) {
+            const user = {
+                email: email.value,
+                adminRole: true,
+                id
+            }
+            setLoginInfo(user)
         } else {
             setCorrectInput(true)
         }
