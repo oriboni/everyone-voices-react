@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
 import styles from "./SortDropDown.module.css";
 import getImage from "../../utils/getImage";
+import {useDispatch, useSelector} from "react-redux";
+import {changeSorting} from "../../store/slices/sortingSlice";
 
 const SortDropDown = () => {
     const [sortDropDown, setSortDropDown] = useState(false)
     const sortMethods = ["Сначала популярные", "Сначала новые", "Сначала старые", "Сначала мои предложения"]
+    const dispatch = useDispatch()
     const choseSort = (index) => {
-        console.log(sortMethods[index])
+        dispatch(changeSorting({sort: sortMethods[index]}))
         setSortDropDown(false)
     }
 

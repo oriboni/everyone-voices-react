@@ -10,9 +10,10 @@ import LoadingComponent from "../loadingComponent/LoadingComponent";
 const TapeComponent = () => {
     const userId = useSelector(state => state.authLevel.id)
     const switchTape = useSelector(state => state.switchTape.switch)
+    const sorting = useSelector(state => state.sortingSlice.sorting)
     const [posts, setPosts] = useState([])
     const [fetchingPost, loadingPost, errorPost] = useFetching(async () => {
-        const postList = await getPosts(userId)
+        const postList = await getPosts(userId, sorting)
         setPosts(postList.data)
     })
     useEffect(() => {
@@ -20,7 +21,7 @@ const TapeComponent = () => {
         if (!!errorPost) {
             alert(errorPost)
         }
-    }, [errorPost]);
+    }, [errorPost, sorting]);
 
     return (
         <div className={styles.wrapper}>
