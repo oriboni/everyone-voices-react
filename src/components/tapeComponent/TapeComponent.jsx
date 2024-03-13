@@ -20,7 +20,6 @@ const TapeComponent = () => {
         if (!!errorPost) {
             alert(errorPost)
         }
-        console.log(posts)
     }, [errorPost]);
 
     return (
