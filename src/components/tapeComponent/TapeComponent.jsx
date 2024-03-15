@@ -22,7 +22,6 @@ const TapeComponent = () => {
             alert(errorPost)
         }
     }, [errorPost, sorting]);
-
     return (
         <div className={styles.wrapper}>
             {
@@ -40,7 +39,7 @@ const TapeComponent = () => {
                             <LoadingComponent/>
                             :
                             posts.map(post => (
-                                <PostCard post={post}/>
+                                <PostCard key={post.id} post={post}/>
                             ))
                         }
 

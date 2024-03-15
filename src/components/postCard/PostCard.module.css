@@ -6,7 +6,6 @@
     padding: 15px 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
 }
 
 .userBlock {
@@ -14,6 +13,7 @@
     display: flex;
     gap: 10px;
     align-items: flex-start;
+    margin-bottom: 10px;
 }
 
 .userBlock img {
@@ -42,10 +42,12 @@
     color: var(--fifth-color);
     font-family: "GardensC", sans-serif;
     font-size: 12px;
+    margin-bottom: 10px;
 }
 
 .blockPictures {
     align-self: center;
+    margin-bottom: 10px;
 }
 
 .blockPictures img {
@@ -59,6 +61,7 @@
 .likeCommentBlock {
     display: flex;
     gap: 10px;
+    margin-bottom: 10px;
 }
 
 .likeBlock {
@@ -90,5 +93,15 @@
 
 .comment {
     cursor: pointer;
+}
+
+.animated {
+    transition: all 1s;
+    height: 0;
+    overflow: hidden;
+}
+
+.wrapper:hover .animated {
+    height: 100%;
 }
 

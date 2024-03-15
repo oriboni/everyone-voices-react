@@ -3,10 +3,12 @@ import styles from './PostCard.module.css'
 import getImage from "../../utils/getImage";
 import {decrementLike, incrementLike} from "../../API/getLike";
 import {useSelector} from "react-redux";
+import CommentList from "../commentList/CommentList";
 const PostCard = ({post}) => {
     const [likeActive, setLikeActive] = useState(post.liked)
     const [timestamp, setTimestamp] = useState('')
     const userId = useSelector(state => state.authLevel.id)
+    const [openComment, setOpenComment] = useState(false)
     const setLike = async () => {
         setLikeActive(!likeActive)
         if (!likeActive) {
@@ -85,10 +87,12 @@ const PostCard = ({post}) => {
                     </div>
                 <img
                     className={styles.comment}
-                     src={getImage("comment")}
+                    src={getImage("comment")}
                     alt=""
+                    onClick={() => setOpenComment(!openComment)}
                 />
             </div>
+            <CommentList openComment={openComment} comments={post.comment} postId={post.id}/>
         </div>
     );
 };

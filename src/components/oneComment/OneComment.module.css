@@ -1,0 +1,57 @@
+.commentWrapper {
+    display: flex;
+    width: 100%;
+}
+
+.imgWrapper {
+    background-color: var(--quaternary-color);
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+}
+
+.textWrapper {
+    width: calc(100% - 20px);
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    gap: 3px;
+}
+
+.name {
+    color: var(--quaternary-color);
+    font-family: "GardensC", sans-serif;
+    font-size: 12px;
+}
+
+.title {
+    color: var(--fifth-color);
+    font-family: "Forum", sans-serif;
+    font-size: 12px;
+}
+
+.timestamp {
+    color: var(--secondary-color);
+    font-family: "Forum", serif;
+    font-size: 9px;
+}
+
+.likeWrapper {
+    display: flex;
+    gap: 4px;
+}
+
+.bottomBar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.like {
+    font-family: "Forum", serif;
+    font-size: 10px;
+}
+
+.likeImg {
+    width: 10px;
+}
