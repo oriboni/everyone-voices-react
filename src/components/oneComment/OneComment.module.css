@@ -47,11 +47,34 @@
     justify-content: space-between;
 }
 
-.like {
-    font-family: "Forum", serif;
-    font-size: 10px;
+.likeBlock {
+    position: relative;
+    cursor: pointer;
+    display: flex;
 }
 
-.likeImg {
+.like {
     width: 10px;
+    height: auto;
+    pointer-events: none;
+}
+
+.likeFill {
+    width: 11px;
+    height: auto;
+    position: absolute;
+    left: -1px;
+    top: 2px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.likeFillActive {
+    opacity: 1;
+}
+
+.likes {
+    font-family: "Forum", serif;
+    font-size: 12px;
 }

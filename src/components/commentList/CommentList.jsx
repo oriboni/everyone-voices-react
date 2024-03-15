@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import OneComment from "../oneComment/OneComment";
 import styles from './CommentList.module.css'
 import useInput from "../../hooks/useInput";
@@ -6,6 +6,7 @@ import {createComment} from "../../API/getComment";
 import {useSelector} from "react-redux";
 
 function CommentList({openComment, comments, postId}) {
+    const [comment, setComment] = useState([...comments])
     const input = useInput('')
     const userId = useSelector(state => state.authLevel.id)
     const postComment = async () => {
@@ -29,7 +30,7 @@ function CommentList({openComment, comments, postId}) {
             </div>
             <div className={openComment ? styles.wrapper : styles.wrapper + " " + styles.wrapperClose}>
 
-                {comments.map(comment => (
+                {comment.map(comment => (
                     <OneComment key={comment.id} comment={comment}/>
                 ))}
             </div>
