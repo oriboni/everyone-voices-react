@@ -1,9 +1,9 @@
-import axios from "axios";
+import $api from "../http";
 
 export const getPosts = async (userId, sorting) => {
-    return await axios.get(`http://localhost:5000/api/post?sorting=${sorting}&user_id=${userId}`)
+    return await $api.get(`/post?sorting=${sorting}&user_id=${userId}`)
 }
 
 export const createPost = async (post) => {
-    await axios.post(`http://localhost:5000/api/post`, post)
+    await $api.post(`/post`, post)
 }

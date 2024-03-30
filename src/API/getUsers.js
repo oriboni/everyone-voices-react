@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const getUsers = async (email) => {
-    const user = await axios.get(`http://localhost:5000/api/userl?email=${email}`)
+    const user = await axios.get(`http://localhost:5000/api/user?email=${email}`, {withCredentials: true, credentials: 'include'})
     return user.data
 }
 

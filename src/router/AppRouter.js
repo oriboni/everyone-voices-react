@@ -6,24 +6,43 @@ import {useDispatch, useSelector} from "react-redux";
 import Cookies from "js-cookie";
 import {authAdmin, authUser} from "../store/slices/authSlice";
 import Layout from "../components/layout/Layout";
+import axios from "axios";
+import {api_url} from "../http";
 
 
 const AppRouter = () => {
     const dispatch = useDispatch()
     const state = useSelector(state => state.authLevel)
-    useEffect(() => {
-        if (!state.email) {
-            const cookie = Cookies.get("profile")
-            if (cookie) {
-                const cookieState = JSON.parse(cookie)
-                if (!cookieState.adminRole) {
-                    dispatch(authUser(cookieState))
-                } else {
-                    dispatch(authAdmin(cookieState))
+    useEffect( () => {
+        async function getData() {
+            if (localStorage.getItem('token')) {
+                try {
+                    const response = await axios.get(`${api_url}/refresh`, {withCredentials: true})
+                    console.log(response.data.user)
+                    dispatch(authUser(response.data.user))
+                    localStorage.setItem('token', response.data.accessToken)
+                } catch (e) {
+                    console.log(e.message)
                 }
 
+
+                // dispatch(authAdmin(cookieState))
             }
         }
+        getData()
+
+        // if (!state.email) {
+        //     const cookie = Cookies.get("profile")
+        //     if (cookie) {
+        //         const cookieState = JSON.parse(cookie)
+        //         if (!cookieState.adminRole) {
+        //             dispatch(authUser(cookieState))
+        //         } else {
+        //             dispatch(authAdmin(cookieState))
+        //         }
+        //
+        //     }
+        // }
     }, []);
 
 

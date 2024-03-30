@@ -10,6 +10,8 @@ import useInput from "../../hooks/useInput"
 import Cookies from "js-cookie";
 import {googleUserInfo} from "../../API/googleUserInfo";
 import {getAdminAuth, getUsers, putUsersIcon} from "../../API/getUsers";
+import AuthService from "../../utils/authService";
+import $api from "../../http";
 
 function Login() {
     const [correctInput, setCorrectInput] = useState(false)
@@ -29,7 +31,7 @@ function Login() {
     }, [email.value, password.value]);
 
     const setLoginInfo = (info) => {
-        Cookies.set('profile', JSON.stringify(info))
+        // Cookies.set('profile', JSON.stringify(info))
         info["adminRole"] ? dispatch(authAdmin(info)) : dispatch(authUser(info))
         navigate("/")
     }
@@ -37,20 +39,11 @@ function Login() {
     // Вход через гугл аккаунт
     const googleLogin = useGoogleLogin ( {
         onSuccess: async (tokenResponse) => {
-            const userInfo = await googleUserInfo(tokenResponse.access_token)
-
-            // Авторизация через сервер
-            const users = await getUsers(userInfo.email)
-            if (users) {
-                putUsersIcon(users.id, userInfo.picture)
-                const user = {
-                    ...userInfo,
-                    name: users.name,
-                    id: users.id
-                }
+            const user = await AuthService.userLogin(tokenResponse)
+            const post = await $api.get('/post')
+            console.log(post)
+            if (user) {
                 setLoginInfo(user)
-            } else {
-                alert("Пользователь не найден :(")
             }
         },
         onError: (errorResponse) => console.log(errorResponse)
