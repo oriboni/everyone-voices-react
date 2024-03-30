@@ -15,12 +15,7 @@ export const authSlice = createSlice({
             state.email = action.payload.email
             state.name = action.payload.name
             state.picture = action.payload.picture
-        },
-        authAdmin: (state, action) => {
-            state.id = action.payload.id
-            state.email = action.payload.email
-            state.name = "ADMIN"
-            state.adminRole = true
+            state.adminRole = action.payload.adminRole
         },
         logout: state => {
             state.id = null

@@ -4,7 +4,9 @@ import getImage from "../../utils/getImage";
 import {decrementLike, incrementLike} from "../../API/getLike";
 import {useSelector} from "react-redux";
 import CommentList from "../commentList/CommentList";
+import {timestampPost} from "../../utils/getDate";
 const PostCard = ({post}) => {
+    const api_url = 'http://localhost:5000/'
     const [likeActive, setLikeActive] = useState(post.liked)
     const [timestamp, setTimestamp] = useState('')
     const userId = useSelector(state => state.authLevel.id)
@@ -12,35 +14,14 @@ const PostCard = ({post}) => {
     const setLike = async () => {
         setLikeActive(!likeActive)
         if (!likeActive) {
-            await incrementLike({postId: post.id, userId})
+            await incrementLike({post_id: post.id, user_id: userId})
         } else {
-            await decrementLike({postId: post.id, userId})
+            await decrementLike({post_id: post.id, user_id: userId})
         }
     }
 
     useEffect(() => {
-        const month = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"]
-        const date = new Date()
-        const timestampPost = () => {
-            const dayNow = date.getDate()
-            const monthNow = date.getMonth()
-            let datePost = post.timestamp.split(" ")[0].split(".")
-            const timePost = post.timestamp.split(" ")[1].split(":")
-            if (timePost[1].length === 1) {
-                timePost[1] =  "0" + timePost[1]
-            }
-            if (dayNow === parseInt(datePost[0]) && monthNow === parseInt(datePost[1])) {
-                datePost = "сегодня"
-                return datePost + " в " + timePost.join(":")
-            }
-            if (dayNow - parseInt(datePost[0]) === 1 && monthNow === parseInt(datePost[1])) {
-                datePost = "вчера"
-                return datePost + " в " + timePost.join(":")
-            }
-            datePost = datePost[0] + " " + month[parseInt(datePost[1]) - 1]
-            return datePost + " в " + timePost.join(":")
-        }
-        setTimestamp(timestampPost())
+        setTimestamp(timestampPost(post))
     }, [post]);
 
 
@@ -64,7 +45,7 @@ const PostCard = ({post}) => {
 
             <div className={styles.blockPictures}>
                 <img
-                    src={post.picture}
+                    src={post.picture ? api_url + post.picture : ''}
                     alt=""
                     loading="lazy"
                 />

@@ -7,14 +7,13 @@ export default class AuthService {
         const userInfo = await googleUserInfo(tokenResponse.access_token)
         const users = await getUsers(userInfo.email)
         if (users) {
-            // putUsersIcon(users.id, userInfo.picture)
             localStorage.setItem('token', users.accessToken)
             const user = {
                 ...userInfo,
                 name: users.name,
                 id: users.id
             }
-            return user
+            return users
         }
         return null
     }

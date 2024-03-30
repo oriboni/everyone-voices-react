@@ -7,9 +7,7 @@ import {useDispatch} from "react-redux";
 import {authAdmin, authUser} from "../../store/slices/authSlice";
 import {useNavigate} from "react-router-dom";
 import useInput from "../../hooks/useInput"
-import Cookies from "js-cookie";
-import {googleUserInfo} from "../../API/googleUserInfo";
-import {getAdminAuth, getUsers, putUsersIcon} from "../../API/getUsers";
+import {getAdminAuth, putUsersIcon} from "../../API/getUsers";
 import AuthService from "../../utils/authService";
 import $api from "../../http";
 
@@ -31,8 +29,7 @@ function Login() {
     }, [email.value, password.value]);
 
     const setLoginInfo = (info) => {
-        // Cookies.set('profile', JSON.stringify(info))
-        info["adminRole"] ? dispatch(authAdmin(info)) : dispatch(authUser(info))
+        dispatch(authUser(info))
         navigate("/")
     }
 
@@ -40,25 +37,24 @@ function Login() {
     const googleLogin = useGoogleLogin ( {
         onSuccess: async (tokenResponse) => {
             const user = await AuthService.userLogin(tokenResponse)
-            const post = await $api.get('/post')
-            console.log(post)
             if (user) {
-                setLoginInfo(user)
+                setLoginInfo(user.user)
+                putUsersIcon(user.user.id, user.user.picture)
             }
         },
         onError: (errorResponse) => console.log(errorResponse)
     });
 
-    // Валидация полей входа по логину и паролю
     const adminLogin = async () => {
-        const {truePassword, id} = await getAdminAuth(email.value, password.value)
-        if (typeof(truePassword) === 'boolean' && truePassword) {
+        const loginInfo = await getAdminAuth(email.value, password.value)
+        if (loginInfo.accessToken) {
+            localStorage.setItem('token', loginInfo.accessToken)
             const user = {
-                email: email.value,
+                email: loginInfo.user.email,
                 adminRole: true,
-                id
+                id: loginInfo.user.id
             }
-            setLoginInfo(user)
+            setLoginInfo(loginInfo.user)
         } else {
             setCorrectInput(true)
         }

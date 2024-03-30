@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './Burger.module.css'
 import getImage from "../../utils/getImage";
-import Cookies from "js-cookie";
 import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../../store/slices/authSlice";
 import {useLocation, useNavigate} from "react-router-dom";
 import {changeSwitcher} from "../../store/slices/switchTape";
+import {logoutUser} from "../../API/getUsers";
 
 const Burger = ({active, setActive}) => {
     const user = useSelector(state => state.authLevel)
@@ -16,11 +16,9 @@ const Burger = ({active, setActive}) => {
         setActive(false)
     }
 
-    const exitProfile = () => {
-        const cookie = Cookies.get('profile')
-        if (cookie) {
-            Cookies.remove('profile')
-        }
+    const exitProfile = async () => {
+        await logoutUser()
+        localStorage.removeItem('token')
         dispatch(logout())
     }
 
