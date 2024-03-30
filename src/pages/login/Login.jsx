@@ -4,12 +4,11 @@ import getImage from '../../utils/getImage'
 import Input from "../../components/input/Input";
 import {useGoogleLogin} from '@react-oauth/google';
 import {useDispatch} from "react-redux";
-import {authAdmin, authUser} from "../../store/slices/authSlice";
+import {authUser} from "../../store/slices/authSlice";
 import {useNavigate} from "react-router-dom";
 import useInput from "../../hooks/useInput"
 import {getAdminAuth, putUsersIcon} from "../../API/getUsers";
 import AuthService from "../../utils/authService";
-import $api from "../../http";
 
 function Login() {
     const [correctInput, setCorrectInput] = useState(false)
@@ -49,11 +48,6 @@ function Login() {
         const loginInfo = await getAdminAuth(email.value, password.value)
         if (loginInfo.accessToken) {
             localStorage.setItem('token', loginInfo.accessToken)
-            const user = {
-                email: loginInfo.user.email,
-                adminRole: true,
-                id: loginInfo.user.id
-            }
             setLoginInfo(loginInfo.user)
         } else {
             setCorrectInput(true)

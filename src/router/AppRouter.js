@@ -1,22 +1,25 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Route, Routes} from "react-router-dom";
 import {userRoutes, adminRoutes} from "./AllRoutes";
 import Login from "../pages/login/Login";
 import {useDispatch, useSelector} from "react-redux";
-import Cookies from "js-cookie";
-import {authAdmin, authUser} from "../store/slices/authSlice";
+import {authUser} from "../store/slices/authSlice";
 import Layout from "../components/layout/Layout";
 import axios from "axios";
 import {api_url} from "../http";
+import LoadingComponent from "../components/loadingComponent/LoadingComponent";
 
 
 const AppRouter = () => {
-    const dispatch = useDispatch()
     const state = useSelector(state => state.authLevel)
+    const [loading, setLoading] = useState(false)
+    const dispatch = useDispatch()
+
     useEffect( () => {
         async function getData() {
-            if (localStorage.getItem('token')) {
+                if (localStorage.getItem('token')) {
                 try {
+                    setLoading(true)
                     const response = await axios.get(`${api_url}/refresh`, {withCredentials: true})
                     if (response) {
                         dispatch(authUser(response.data.user))
@@ -24,11 +27,19 @@ const AppRouter = () => {
                     }
                 } catch (e) {
                     console.log(e.message)
+                } finally {
+                    setLoading(false)
                 }
             }
         }
         getData()
-    }, []);
+    }, [dispatch]);
+
+    if (loading) {
+        return (
+            <LoadingComponent />
+        )
+    }
 
     if (state.email) {
         if (!state.adminRole) {
