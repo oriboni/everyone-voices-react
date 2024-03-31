@@ -7,6 +7,7 @@ export default class AuthService {
         const users = await getUsers(userInfo.email)
         if (users) {
             localStorage.setItem('token', users.accessToken)
+            users.user.picture = userInfo.picture
             return users
         }
         return null
