@@ -17,7 +17,7 @@ const Burger = ({active, setActive}) => {
     }
 
     const exitProfile = async () => {
-        await logoutUser()
+        await logoutUser(user.email)
         localStorage.removeItem('token')
         dispatch(logout())
     }

@@ -7,10 +7,10 @@ import CommentList from "../commentList/CommentList";
 import {timestampPost} from "../../utils/getDate";
 const PostCard = ({post}) => {
     const api_url = 'http://localhost:5000/'
-    const [likeActive, setLikeActive] = useState(post.liked)
     const [timestamp, setTimestamp] = useState('')
     const userId = useSelector(state => state.authLevel.id)
     const [openComment, setOpenComment] = useState(false)
+    const [likeActive, setLikeActive] = useState(post.likedUser.some(obj => obj.id === userId))
     const setLike = async () => {
         setLikeActive(!likeActive)
         if (!likeActive) {
@@ -20,9 +20,9 @@ const PostCard = ({post}) => {
         }
     }
 
-    useEffect(() => {
-        setTimestamp(timestampPost(post))
-    }, [post]);
+    // useEffect(() => {
+    //     setTimestamp(timestampPost(post))
+    // }, [post]);
 
 
 
@@ -35,7 +35,7 @@ const PostCard = ({post}) => {
                 />
                 <div className={styles.userInfo}>
                     <span>{post.user.name}</span>
-                    <span className={styles.timeStamp}>{timestamp}</span>
+                    <span className={styles.timeStamp}>{post.timestamp}</span>
                 </div>
             </div>
 
@@ -44,11 +44,11 @@ const PostCard = ({post}) => {
             </div>
 
             <div className={styles.blockPictures}>
-                <img
-                    src={post.picture ? api_url + post.picture : ''}
-                    alt=""
-                    loading="lazy"
-                />
+                {/*<img*/}
+                {/*    src={post.picture ? api_url + post.picture : ''}*/}
+                {/*    alt=""*/}
+                {/*    loading="lazy"*/}
+                {/*/>*/}
             </div>
 
             <div className={styles.likeCommentBlock}>

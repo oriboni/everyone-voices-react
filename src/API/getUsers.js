@@ -1,8 +1,9 @@
-import $api from "../http";
+import $api, {api_url} from "../http";
+import axios from "axios";
 
 export const getUsers = async (email) => {
     try {
-        const user = await $api.get(`/login?email=${email}`)
+        const user = await axios.put(`${api_url}/auth/user-login`, email, {withCredentials: true})
         if (!user) {
             throw new Error('Такого пользователя не существует!')
         }
@@ -16,7 +17,7 @@ export const getUsers = async (email) => {
 
 export const putUsersIcon = async (id, picture) => {
     try {
-        await $api.put('/user', {id, picture})
+        await $api.put('/user/user-icon', {id, picture})
     } catch(e) {
         console.log(e.message)
     }
@@ -24,7 +25,7 @@ export const putUsersIcon = async (id, picture) => {
 
 export const getAdminAuth = async (email, password) => {
     try {
-        const auth = await $api.get(`/admin?email=${email}&password=${password}`)
+        const auth = await axios.put(`${api_url}/auth/admin-login`, {email, password}, {withCredentials: true})
         if (!auth) {
             throw new Error('Неверный логин/пароль')
         }
@@ -35,6 +36,12 @@ export const getAdminAuth = async (email, password) => {
     }
 }
 
-export const logoutUser = async () => {
-    await $api.put(`/logout`)
+export const logoutUser = async (email) => {
+    try {
+        return await $api.put(`/auth/logout`, {email})
+    } catch (e) {
+        return false
+    }
+
+
 }

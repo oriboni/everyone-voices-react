@@ -4,9 +4,9 @@ import getImage from "../../utils/getImage";
 import {dislikeComment, likeComment} from "../../API/getComment";
 import {useSelector} from "react-redux";
 const OneComment = ({comment}) => {
-    const [likeActive, setLikeActive] = useState(comment.liked)
     const [countLike, setCountLike] = useState(comment.likes)
     const user_id = useSelector(state => state.authLevel.id)
+    const [likeActive, setLikeActive] = useState(comment.likedUser.some(obj => obj.id === user_id))
     const setLike = async () => {
         setLikeActive(!likeActive)
         if (!likeActive) {

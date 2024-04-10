@@ -14,6 +14,7 @@ const TapeComponent = () => {
     const [posts, setPosts] = useState([])
     const [fetchingPost, loadingPost, errorPost] = useFetching(async () => {
         const postList = await getPosts(userId, sorting)
+        console.log(postList)
         setPosts(postList.data)
     })
     useEffect(() => {

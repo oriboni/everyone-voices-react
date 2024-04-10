@@ -20,7 +20,7 @@ const AppRouter = () => {
                 if (localStorage.getItem('token')) {
                 try {
                     setLoading(true)
-                    const response = await axios.get(`${api_url}/refresh`, {withCredentials: true})
+                    const response = await axios.put(`${api_url}/auth/refresh`, {},{withCredentials: true})
                     if (response) {
                         dispatch(authUser(response.data.user))
                         localStorage.setItem('token', response.data.accessToken)
