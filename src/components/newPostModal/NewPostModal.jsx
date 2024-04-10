@@ -3,7 +3,7 @@ import styles from './NewPostModal.module.css'
 import useInput from "../../hooks/useInput";
 import {useSelector} from "react-redux";
 import {createPost} from "../../API/getPosts";
-const NewPostModal = ({activeModal, setActiveModal}) => {
+const NewPostModal = ({activeModal, setActiveModal, setPost}) => {
     const themePost = useInput("")
     const [image, setImage] = useState(null)
     const [file, setFile] = useState(null)
@@ -26,9 +26,10 @@ const NewPostModal = ({activeModal, setActiveModal}) => {
         const formData = new FormData()
         formData.append('file', file)
         formData.append('title', themePost.value)
-        formData.append('timestamp', `${date.getDate()}.${date.getMonth()}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`)
+        formData.append('timestamp', date.toLocaleString('en-US', {timeZone: 'Europe/Moscow'}))
         formData.append('user_id', user.id)
-        await createPost(formData)
+        const newPost = await createPost(formData)
+        setPost(prev => [newPost.data, ...prev])
         setActiveModal(false)
     }
 

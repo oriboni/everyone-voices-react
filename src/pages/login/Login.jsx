@@ -39,7 +39,7 @@ function Login() {
             if (user) {
                 setLoginInfo(user.user)
                 console.log(user)
-                // await putUsersIcon(user.user.id, user.user.picture)
+                await putUsersIcon(user.user.id, user.user.picture)
             }
         },
         onError: (errorResponse) => console.log(errorResponse)

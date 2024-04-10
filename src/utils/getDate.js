@@ -4,11 +4,9 @@ export const timestampPost = (post) => {
     const date = new Date()
     const dayNow = date.getDate()
     const monthNow = date.getMonth()
-    let datePost = post.timestamp.split(" ")[0].split(".")
+    let datePost = post.timestamp.split(" ")[0].split("/")
     const timePost = post.timestamp.split(" ")[1].split(":")
-    if (timePost[1].length === 1) {
-        timePost[1] =  "0" + timePost[1]
-    }
+    timePost.pop()
     if (dayNow === parseInt(datePost[0]) && monthNow === parseInt(datePost[1])) {
         datePost = "сегодня"
         return datePost + " в " + timePost.join(":")

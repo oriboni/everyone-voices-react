@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styles from './NewPostButton.module.css'
 import NewPostModal from "../newPostModal/NewPostModal";
-const NewPostButton = () => {
+const NewPostButton = ({setPost}) => {
     const [activeModal, setActiveModal] = useState(false)
     return (
         <div>
@@ -14,6 +14,7 @@ const NewPostButton = () => {
             <NewPostModal
                 activeModal={activeModal}
                 setActiveModal={setActiveModal}
+                setPost={setPost}
             />
         </div>
     );

@@ -6,7 +6,7 @@ export const getPosts = async (userId, sorting) => {
 
 export const createPost = async (post) => {
     try {
-        await $api.post(`/post`, post)
+        return await $api.post(`/post/create`, post)
     } catch(e) {
         console.log(e.message)
     }

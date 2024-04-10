@@ -20,9 +20,9 @@ const PostCard = ({post}) => {
         }
     }
 
-    // useEffect(() => {
-    //     setTimestamp(timestampPost(post))
-    // }, [post]);
+    useEffect(() => {
+        setTimestamp(timestampPost(post))
+    }, [post]);
 
 
 
@@ -35,7 +35,7 @@ const PostCard = ({post}) => {
                 />
                 <div className={styles.userInfo}>
                     <span>{post.user.name}</span>
-                    <span className={styles.timeStamp}>{post.timestamp}</span>
+                    <span className={styles.timeStamp}>{timestamp}</span>
                 </div>
             </div>
 
@@ -44,11 +44,11 @@ const PostCard = ({post}) => {
             </div>
 
             <div className={styles.blockPictures}>
-                {/*<img*/}
-                {/*    src={post.picture ? api_url + post.picture : ''}*/}
-                {/*    alt=""*/}
-                {/*    loading="lazy"*/}
-                {/*/>*/}
+                <img
+                    src={post.picture ? api_url + 'uploads/' + post.picture : ''}
+                    alt=""
+                    loading="lazy"
+                />
             </div>
 
             <div className={styles.likeCommentBlock}>
