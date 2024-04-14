@@ -1,5 +1,6 @@
 import NewsTape from "../pages/newsTape/NewsTape";
 import NotFound from "../pages/notFound/NotFound";
+import CurrentPost from "../pages/currentPost/CurrentPost";
 
 export const userRoutes = [
     {
@@ -11,6 +12,10 @@ export const userRoutes = [
         path: "*",
         element: <NotFound />
     },
+    {
+        path: '/post/:post_id',
+        element: <CurrentPost/>
+    }
 ]
 
 export const adminRoutes = [
@@ -23,4 +28,8 @@ export const adminRoutes = [
         path: "*",
         element: <NotFound />
     },
+    {
+        path: '/post/:post_id',
+        element: <CurrentPost/>
+    }
 ]

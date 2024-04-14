@@ -16,11 +16,13 @@ const TapeComponent = () => {
         const postList = await getPosts(userId, sorting)
         setPosts(postList.data)
     })
+
     useEffect(() => {
         fetchingPost()
         if (!!errorPost) {
             alert(errorPost)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [errorPost, sorting]);
     return (
         <div className={styles.wrapper}>
@@ -39,7 +41,7 @@ const TapeComponent = () => {
                             <LoadingComponent/>
                             :
                             posts.map(post => (
-                                <PostCard key={post.id} post={post}/>
+                                <PostCard openPopComm={false} key={post.id} post={post}/>
                             ))
                         }
 

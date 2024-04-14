@@ -1,0 +1,74 @@
+.wrapp {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 50px 0 35px 0;
+    width: 100dvw;
+    align-items: center;
+    justify-content: center;
+    max-width: 1100px;
+}
+
+.wrapperHeader {
+    display: flex;
+    align-items: center;
+    background-color: var(--tertiary-color);
+    margin: 5px 0 5px 0;
+    padding: 0 15px;
+    height: 30px;
+    width: calc(98% - 30px);
+    border-radius: 6px;
+    z-index: 1;
+}
+
+.headerText {
+    font-family: "GardensC", sans-serif;
+    font-size: 12px;
+    margin-left: 20px;
+    color: var(--quaternary-color);
+}
+
+.arrow {
+    filter: invert(0%) sepia(200%) hue-rotate(86deg) contrast(519%) brightness(200%);
+    transform: rotate(90deg);
+    width: 8px;
+    height: 5px;
+    cursor: pointer;
+}
+
+.commentInput {
+    border-radius: 6px 6px 0 0;
+    width: calc(100% - 60px);
+    max-width: 1020px;
+    border: 0;
+    outline: none;
+    padding: 0 50px 0 10px;
+    background-color: var(--tertiary-color);
+    height: 30px;
+    bottom: 0;
+    font-family: "GardensC", sans-serif;
+    filter:drop-shadow(-5px -1px 7px rgba(0.4,0.4,0.4, .1));
+}
+
+.inputWrapper {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 1100px;
+}
+
+.sendButton {
+    cursor: pointer;
+    position: absolute;
+    right: 1%;
+    bottom: 0;
+    z-index: 2;
+}

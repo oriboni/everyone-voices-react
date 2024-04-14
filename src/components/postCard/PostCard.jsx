@@ -3,14 +3,16 @@ import styles from './PostCard.module.css'
 import getImage from "../../utils/getImage";
 import {decrementLike, incrementLike} from "../../API/getLike";
 import {useSelector} from "react-redux";
-import CommentList from "../commentList/CommentList";
 import {timestampPost} from "../../utils/getDate";
-const PostCard = ({post}) => {
+import TwoCommentList from "../twoCommentList/TwoCommentList";
+import {Link} from "react-router-dom";
+const PostCard = ({post, openPopComm, commentButton}) => {
     const api_url = 'http://localhost:5000/'
     const [timestamp, setTimestamp] = useState('')
     const userId = useSelector(state => state.authLevel.id)
     const [openComment, setOpenComment] = useState(false)
     const [likeActive, setLikeActive] = useState(post.likedUser.some(obj => obj.id === userId))
+    const [popularComment, setPopularComment] = useState([])
     const setLike = async () => {
         setLikeActive(!likeActive)
         if (!likeActive) {
@@ -21,8 +23,19 @@ const PostCard = ({post}) => {
     }
 
     useEffect(() => {
-        setTimestamp(timestampPost(post))
-    }, [post]);
+        setTimestamp(timestampPost(post.timestamp))
+        if (post.comment.length) {
+            if (openPopComm) {
+                setPopularComment(post.comment)
+            } else {
+                if (post.comment.length >= 2) {
+                    setPopularComment([post.comment[0], post.comment[1]])
+                } else {
+                    setPopularComment([post.comment[0]])
+                }
+            }
+        }
+    }, [post, openPopComm]);
 
 
 
@@ -66,14 +79,16 @@ const PostCard = ({post}) => {
                             alt=""
                         />
                     </div>
-                <img
-                    className={styles.comment}
-                    src={getImage("comment")}
-                    alt=""
-                    onClick={() => setOpenComment(!openComment)}
-                />
+                <Link to={`/post/${post.id}`} className={commentButton ? styles.commentButton : styles.commentButtonActive}>
+                    <img
+                        className={styles.comment}
+                        src={getImage("comment")}
+                        alt=""
+                        onClick={() => setOpenComment(!openComment)}
+                    />
+                </Link>
             </div>
-            <CommentList openComment={openComment} comments={post.comment} postId={post.id}/>
+            <TwoCommentList comments={popularComment}/>
         </div>
     );
 };

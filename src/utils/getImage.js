@@ -13,6 +13,7 @@ import like from '../icons/like.svg'
 import comment from '../icons/comment.svg'
 import arrowDown from '../icons/arrowDown.png'
 import search from '../icons/search.svg'
+import send from '../icons/sendButton.svg'
 
 const images = {
     logo,
@@ -29,7 +30,8 @@ const images = {
     likeFill,
     comment,
     arrowDown,
-    search
+    search,
+    send
 }
 
 function getImage(key) {

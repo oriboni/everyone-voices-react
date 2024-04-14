@@ -3,7 +3,7 @@
     height: auto;
     background-color: var(--tertiary-color);
     border-radius: 6px;
-    padding: 15px 20px;
+    padding: 15px 20px 5px 20px;
     display: flex;
     flex-direction: column;
 }
@@ -14,6 +14,16 @@
     gap: 10px;
     align-items: flex-start;
     margin-bottom: 10px;
+}
+
+.commentButton {
+    display: none;
+}
+
+.commentButtonActive {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .userBlock img {

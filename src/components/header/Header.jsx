@@ -13,7 +13,7 @@ const Header = () => {
     }
 
     return (
-        <div className={styles.wrap}>
+        <div>
             <div className={styles.wrapper}>
                 <img
                     className={styles.logo}

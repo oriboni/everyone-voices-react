@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './NewPostModal.module.css'
 import useInput from "../../hooks/useInput";
 import {useSelector} from "react-redux";
