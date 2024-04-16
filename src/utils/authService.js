@@ -4,7 +4,6 @@ import {getUsers} from "../API/getUsers";
 export default class AuthService {
     static async userLogin(tokenResponse) {
         const userInfo = await googleUserInfo(tokenResponse.access_token)
-        console.log(userInfo)
         const users = await getUsers(userInfo.email)
         if (users) {
             localStorage.setItem('token', users.accessToken)

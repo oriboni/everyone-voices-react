@@ -18,7 +18,7 @@ export const getUsers = async (email) => {
 
 export const putUsersIcon = async (id, picture) => {
     try {
-        await $api.put('/user/user-icon', {id, picture})
+        await $api.put('/user/user-icon', {user_id: id, picture})
     } catch(e) {
         console.log(e.message)
     }
