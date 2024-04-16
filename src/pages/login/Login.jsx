@@ -38,7 +38,6 @@ function Login() {
             const user = await AuthService.userLogin(tokenResponse)
             if (user) {
                 setLoginInfo(user.user)
-                console.log(user)
                 await putUsersIcon(user.user.id, user.user.picture)
             }
         },

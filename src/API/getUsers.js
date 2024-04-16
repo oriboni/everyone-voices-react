@@ -3,7 +3,8 @@ import axios from "axios";
 
 export const getUsers = async (email) => {
     try {
-        const user = await axios.put(`${api_url}/auth/user-login`, email, {withCredentials: true})
+        console.log(email)
+        const user = await axios.put(`${api_url}/auth/user-login`, {email}, {withCredentials: true})
         if (!user) {
             throw new Error('Такого пользователя не существует!')
         }
