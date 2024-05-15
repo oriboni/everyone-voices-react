@@ -2,7 +2,6 @@ import React, {useMemo, useState} from 'react';
 import styles from "./FilterDropDown.module.css";
 import getImage from "../../utils/getImage";
 import useInput from "../../hooks/useInput";
-import {useSelector} from "react-redux";
 
 const FilterDropDown = () => {
 
