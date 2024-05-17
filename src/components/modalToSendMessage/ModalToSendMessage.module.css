@@ -1,0 +1,118 @@
+.toSendrapper {
+    position: fixed;
+    display: flex;
+    width: 99%;
+    height: 99vh;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+
+}
+
+.toSendBlock{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: calc(1vh / 2);
+    left: calc(1% / 2);
+    background: #fff;
+    border-radius: 4px;
+    border-radius: 6px;
+    overflow: auto;
+    background-color: #ECECEC;
+}
+
+.toSendHead{
+    font-family: "GardensC", sans-serif;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 6%;
+    padding: 0 13px;
+    background-color: #D9D9D9;
+}
+
+.toSendExit:before, .toSendExit:after {
+    position: absolute;
+    right: 17px;
+    top: 18px;
+    content: ' ';
+    height: 17px;
+    width: 1px;
+    background-color: #333;
+  }
+.toSendExit:before {
+  transform: rotate(45deg);
+}
+.toSendExit:after {
+  transform: rotate(-45deg);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: baseline;
+}
+
+.toSendInputTheme, .toSendInputText {
+    font-family: "Forum", serif;
+    text-align: justify;
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: #ECECEC;
+    margin-bottom: 20px;
+    width: 99%;
+    resize: none;
+}
+
+.toSendInputTheme {
+    height: 4vh;
+}
+
+.toSendInputText{
+    height: 20vh;
+}
+
+.toSendAttach, .toSendSend {
+    height: 25px;
+    width: 25px;
+}
+
+.toSendButAttachImg, .toSendButSendImg {
+    position: absolute;
+    height: 25px;
+    width: 25px;
+}
+
+.toSendInputAttach, .toSendInputImage {
+    position: absolute;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.toSendButAttach {
+    position: absolute;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+}
+
+.toSendButSend {
+    position: absolute;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+}
+
+.choseImageDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.choseImage{
+    width: 100px;
+    height: 100px;
+}
